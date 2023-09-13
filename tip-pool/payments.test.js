@@ -9,8 +9,6 @@ describe("Payments test (with setup and tear-down)", function() {
   
     it('should add a new payment to allPayments on submitPaymentInfo() ', function () {
       submitPaymentInfo();
-      const serEarnings = serverTbody.querySelector('#Alice');
-
       expect(Object.keys(allPayments).length).toEqual(1);
       expect(allPayments['payment1'].billAmt).toEqual('1000');
       expect(allPayments['payment1'].tipAmt).toEqual('350');
@@ -32,7 +30,7 @@ describe("Payments test (with setup and tear-down)", function() {
   
       let curTdList = document.querySelectorAll('#paymentTable tbody tr td');
   
-      expect(curTdList.length).toEqual(3);
+      expect(curTdList.length).toEqual(4);
       expect(curTdList[0].innerText).toEqual('$1000');
       expect(curTdList[1].innerText).toEqual('$350');
       expect(curTdList[2].innerText).toEqual('35%');
@@ -46,9 +44,11 @@ describe("Payments test (with setup and tear-down)", function() {
     });
 
     it('update summaryTds on updateSummary()', function(){
-
-      
-
+      submitPaymentInfo();
+      let summaryTds = document.querySelectorAll('#summaryTable tbody tr td');
+      expect(summaryTds[0].innerHTML).toEqual('$1000');
+      expect(summaryTds[1].innerHTML).toEqual('$350');
+      expect(summaryTds[2].innerHTML).toEqual('35%');
     });
 
 
@@ -62,8 +62,10 @@ describe("Payments test (with setup and tear-down)", function() {
       serverNameInput.value = '';
       allServers = {};
       serverTbody.innerHTML = '';
+      serverId = 0;
 
       allPayments = {};
+      paymentId = 0;
 
       paymentTbody.innerHTML = '';
       summaryTds[0].innerHTML = '';
