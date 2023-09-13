@@ -11,7 +11,7 @@ function sumPaymentTotal(type) {
 
   return total;
 }
-
+ 
 // converts the bill and tip amount into a tip percent
 function calculateTipPercent(billAmt, tipAmt) {
   return Math.round(100 / (billAmt / tipAmt));
